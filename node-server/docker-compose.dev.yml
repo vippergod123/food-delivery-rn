@@ -1,0 +1,24 @@
+version: "3"
+services:
+  nginx:
+    ports:
+      - "3000:80"
+  node-server:
+    build:
+      context: .
+      args:
+        NODE_ENV: development
+    volumes:
+      - ./:/usr/src/app
+      - /user/src/app/node_modules #prevent overwrite this modules in container
+    environment:
+      - NODE_ENV=development
+      - MONGO_USER=abc
+      - MONGO_PASSWORD=abc
+      - SESSION_SECRET=secret
+    command: npm run dev
+  mongo:
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=abc
+      - MONGO_INITDB_ROOT_PASSWORD=abc

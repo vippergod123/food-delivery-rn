@@ -1,0 +1,13 @@
+version: "3"
+services:
+  node-server:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/usr/src/app
+      - /user/src/app/node_modules #prevent overwrite this modules in container
+    environment:
+      - PORT=3000
+    # env_file:
+    #   - ./.env
